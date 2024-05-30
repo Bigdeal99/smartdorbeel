@@ -26,44 +26,21 @@ public class BellService
         try
         {
             _bellRepository.AddBellData(topic, null, message).Wait();
-            _logger.LogInformation("Handled received message on '{Topic}': {Message}", topic, message);
-
-            // Send HTTP request to IFTTT
-            using (var httpClient = new HttpClient())
-            {
-                var requestUri = "https://maker.ifttt.com/trigger/button_pressed/with/key/nYTXhTPJg0LkIgtxP45lX8OmITfAhV_3zEN7LGMCTEz";
-                var payload = new Dictionary<string, string>
-                {
-                    { "value1", topic },
-                    { "value2", message }
-                };
-                var content = new FormUrlEncodedContent(payload);
-                var response = httpClient.PostAsync(requestUri, content).Result;
-
-                if (response.IsSuccessStatusCode)
-                {
-                    _logger.LogInformation("Successfully sent IFTTT request for topic '{Topic}' with message '{Message}'", topic, message);
-                }
-                else
-                {
-                    _logger.LogError("Failed to send IFTTT request. Status code: {StatusCode}", response.StatusCode);
-                }
-            }
+            _logger.LogInformation("handled received message on '{Topic}': {Message}", topic, message);
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "An error occurred while handling the received message.");
-            throw new AppException("An error occurred while handling the received message. Please try again.");
+            _logger.LogError(e, "An error occured while handling the received message.");
+            throw new AppException("An error occured while handling the received message, Please try again ..");
         }
     }
-
 
     public async Task ControlCamera(string topic, string command)
     {
         try
         {
             await _mqttUtility.PublishAsync(topic, command);
-            //await _bellRepository.AddBellData(null, topic, command);
+            await _bellRepository.AddBellData(null, topic, command);
             _logger.LogInformation("Command '{Command}' to '{Topic}' has been sent", command, topic);
         }
         catch (AppException e)
