@@ -48,13 +48,18 @@ var blobStorageService = app.Services.GetRequiredService<BlobStorageService>();
 builder.WebHost.UseUrls("http://*:9999");
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8181";
 var server = new WebSocketServer("ws://0.0.0.0:" + port);
-
+bool sebsecribe = false;
 ServiceLocator.ServiceProvider = app.Services;
 
 server.Start(socket =>
 {
-    var bellService = app.Services.GetRequiredService <BellService >();
-    bellService.OpenConnection();
+    if (!sebsecribe)
+    {
+        var bellService = app.Services.GetRequiredService <BellService >();
+        bellService.OpenConnection();
+        sebsecribe = true;
+    }
+   
     var keepAliveInterval = TimeSpan.FromSeconds(30);
     var keepAliveTimer = new System.Timers.Timer(keepAliveInterval.TotalMilliseconds)
     {
