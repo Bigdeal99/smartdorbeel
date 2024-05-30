@@ -158,7 +158,7 @@ public class MQTTUtility
             var subscribeOptions = new MqttClientSubscribeOptionsBuilder()
                 .WithTopicFilter(f =>
                     f.WithTopic(topic)
-                        .WithQualityOfServiceLevel(MQTTnet.Protocol.MqttQualityOfServiceLevel.AtLeastOnce))
+                        .WithQualityOfServiceLevel(MQTTnet.Protocol.MqttQualityOfServiceLevel.ExactlyOnce))
                 .Build();
 
             try
