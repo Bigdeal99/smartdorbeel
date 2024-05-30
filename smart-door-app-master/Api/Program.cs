@@ -52,7 +52,9 @@ var server = new WebSocketServer("ws://0.0.0.0:" + port);
 ServiceLocator.ServiceProvider = app.Services;
 
 server.Start(socket =>
-{ 
+{
+    var bellService = app.Services.GetRequiredService <BellService >();
+    bellService.OpenConnection();
     var keepAliveInterval = TimeSpan.FromSeconds(30);
     var keepAliveTimer = new System.Timers.Timer(keepAliveInterval.TotalMilliseconds)
     {
