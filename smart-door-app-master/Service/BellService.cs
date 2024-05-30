@@ -27,7 +27,28 @@ public class BellService
         {
             _bellRepository.AddBellData(topic, null, message).Wait();
             _logger.LogInformation("handled received message on '{Topic}': {Message}", topic, message);
+            using (var httpClient = new HttpClient())
+            {
+                var requestUri = "https://maker.ifttt.com/trigger/button_pressed/with/key/nYTXhTPJg0LkIgtxP45lX8OmITfAhV_3zEN7LGMCTEz";
+                var payload = new Dictionary<string, string>
+                {
+                    { "value1", topic },
+                    { "value2", message }
+                };
+                var content = new FormUrlEncodedContent(payload);
+                var response = httpClient.PostAsync(requestUri, content).Result;
+
+                if (response.IsSuccessStatusCode)
+                {
+                    _logger.LogInformation("Successfully sent IFTTT request for topic '{Topic}' with message '{Message}'", topic, message);
+                }
+                else
+                {
+                    _logger.LogError("Failed to send IFTTT request. Status code: {StatusCode}", response.StatusCode);
+                }
+            }
         }
+        
         catch (Exception e)
         {
             _logger.LogError(e, "An error occured while handling the received message.");
