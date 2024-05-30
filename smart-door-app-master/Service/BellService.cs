@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Text.Json;
 using Common;
 using Infrastructure;
 using Microsoft.Extensions.Logging;
@@ -28,13 +29,14 @@ public class BellService
             _bellRepository.AddBellData(topic, null, message).Wait();
             _logger.LogInformation("handled received message on '{Topic}': {Message}", topic, message);
             using (var httpClient = new HttpClient())
-            {
-                var requestUri = $"https://maker.ifttt.com/trigger/{message}/with/key/nYTXhTPJg0LkIgtxP45lX8OmITfAhV_3zEN7LGMCTEz";
-                var payload = new Dictionary<string, string>
+            {var payload = new Dictionary<string, string>
                 {
                     { "value1", topic },
                     { "value2", message }
                 };
+                var messageToiffft = JsonSerializer.Serialize(payload);
+                var requestUri = $"https://maker.ifttt.com/trigger/{messageToiffft}/json/with/key/nYTXhTPJg0LkIgtxP45lX8OmITfAhV_3zEN7LGMCTEz";
+                
                 var content = new FormUrlEncodedContent(payload);
                 var response = httpClient.PostAsync(requestUri, content).Result;
 
