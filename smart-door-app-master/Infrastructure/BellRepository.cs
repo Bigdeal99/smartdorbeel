@@ -65,7 +65,7 @@ public class BellRepository
         {
             using (var connection = _dataSource.CreateConnection())
             {
-                _logger.LogInformation("Fetching car log.");
+                _logger.LogInformation("Fetching bell log.");
                 return await connection.QueryAsync<BellData>(query);
             }
         }
