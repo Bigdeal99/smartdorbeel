@@ -34,8 +34,7 @@ public class BellService
                     { "value1", topic },
                     { "value2", message }
                 };
-                var messageToiffft = JsonSerializer.Serialize(payload);
-                var requestUri = $"https://maker.ifttt.com/trigger/{messageToiffft}/json/with/key/nYTXhTPJg0LkIgtxP45lX8OmITfAhV_3zEN7LGMCTEz";
+                var requestUri = $"https://maker.ifttt.com/trigger/{payload}/json/with/key/nYTXhTPJg0LkIgtxP45lX8OmITfAhV_3zEN7LGMCTEz";
                 
                 var content = new FormUrlEncodedContent(payload);
                 var response = httpClient.PostAsync(requestUri, content).Result;
