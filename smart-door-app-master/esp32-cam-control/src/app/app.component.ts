@@ -11,6 +11,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('Initializing WebSocket connection...');
-    this.websocketService.connect('ws://localhost:8181');
+    this.websocketService.connect('wss://smartdoorbell-bd95d83b892f.herokuapp.com');
   }
 }
