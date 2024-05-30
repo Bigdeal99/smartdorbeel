@@ -49,6 +49,7 @@ public class MQTTUtility
             var topic = e.ApplicationMessage.Topic;
             var message = Encoding.UTF8.GetString(e.ApplicationMessage.PayloadSegment);
             _logger.LogInformation("Received on {Topic}: {Message}", topic, message);
+            MessageReceived?.Invoke(topic, message);
             await Task.CompletedTask;
         }
         public async Task ConnectAsync()
