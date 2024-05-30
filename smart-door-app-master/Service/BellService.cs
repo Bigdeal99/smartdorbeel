@@ -20,18 +20,20 @@ public class BellService
         _logger = logger;
     }
 
-    public void HandleReceivedMessage(string topic, string message)
+    public async void HandleReceivedMessage(string topic, string message)
     {
         OnNotificationReceived?.Invoke(topic, message);
         try
         {
-            _bellRepository.AddBellData(topic, null, message).Wait();
-            _logger.LogInformation("handled received message on '{Topic}': {Message}", topic, message);
+            // Ensure to_topic is never null
+            string toTopic = "default"; // Use a default value if to_topic is not provided
+            await _bellRepository.AddBellData(topic, toTopic, message);
+            _logger.LogInformation("Handled received message on '{Topic}': {Message}", topic, message);
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "An error occured while handling the received message.");
-            throw new AppException("An error occured while handling the received message, Please try again ..");
+            _logger.LogError(e, "An error occurred while handling the received message.");
+            throw new AppException("An error occurred while handling the received message, please try again.");
         }
     }
 
@@ -40,19 +42,19 @@ public class BellService
         try
         {
             await _mqttUtility.PublishAsync(topic, command);
-            await _bellRepository.AddBellData(null, topic, command);
+            //await _bellRepository.AddBellData(null, topic, command);
             _logger.LogInformation("Command '{Command}' to '{Topic}' has been sent", command, topic);
         }
         catch (AppException e)
         {
-            _logger.LogError(e, "AppException occured while sending camera command.");
+            _logger.LogError(e, "AppException occurred while sending camera command.");
             throw;
         }
         catch (Exception e)
         {
-            _logger.LogError(e, "An unexpected error occured at Bell Service.");
+            _logger.LogError(e, "An unexpected error occurred at Bell Service.");
             throw new AppException(
-                "An unexpected error occured while sending commands to camera, please try again later ..");
+                "An unexpected error occurred while sending commands to camera, please try again later ..");
         }
     }
     
@@ -126,4 +128,4 @@ public class BellService
             throw new AppException("An unexpected error occurred while fetching bell log. Please try again later.");
         }
     }
-} 
+}

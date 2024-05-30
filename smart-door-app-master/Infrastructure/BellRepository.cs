@@ -28,14 +28,13 @@ public class BellRepository
         {
             using (var connection = _dataSource.CreateConnection())
             {
-                _logger.LogInformation("Adding bell data ...");
+                _logger.LogInformation("Adding bell data...");
                 return await connection.QueryFirstAsync<BellData>(query, new
                 {
                     FromTopic = fromTopic,
                     ToTopic = toTopic,
                     Message = message,
-                    MessageAt = DateTime.Now.ToString("ddMMyyyyHHmmss")
-
+                    MessageAt = DateTime.UtcNow // Use DateTime.UtcNow instead of string
                 });
             }
         }
@@ -65,7 +64,7 @@ public class BellRepository
         {
             using (var connection = _dataSource.CreateConnection())
             {
-                _logger.LogInformation("Fetching car log.");
+                _logger.LogInformation("Fetching bell log.");
                 return await connection.QueryAsync<BellData>(query);
             }
         }
@@ -159,4 +158,4 @@ SELECT from_topic as {nameof(BellData.FromTopic)},
             throw new AppException("An unexpected error occurred while fetching bell data by closest time range. Please try again later.");
         }
     }
-} 
+}
