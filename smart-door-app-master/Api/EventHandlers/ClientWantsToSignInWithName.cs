@@ -40,7 +40,7 @@ public class ClientWantsToSignInWithName : BaseEventHandler<ClientWantsToSignInW
             }
 
             _logger.LogInformation("Opening connection for client {ClientId}.", socket.ConnectionInfo.Id);
-            await _bellService.OpenConnection();
+            //await _bellService.OpenConnection();
 
             metaData.Username = dto.Name;
             socket.Send(JsonSerializer.Serialize(new ServerSendsInfoToClient
