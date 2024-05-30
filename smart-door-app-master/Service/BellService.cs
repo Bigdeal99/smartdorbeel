@@ -29,7 +29,7 @@ public class BellService
             _logger.LogInformation("handled received message on '{Topic}': {Message}", topic, message);
             using (var httpClient = new HttpClient())
             {
-                var requestUri = "https://maker.ifttt.com/trigger/button_pressed/with/key/nYTXhTPJg0LkIgtxP45lX8OmITfAhV_3zEN7LGMCTEz";
+                var requestUri = $"https://maker.ifttt.com/trigger/{message}/with/key/nYTXhTPJg0LkIgtxP45lX8OmITfAhV_3zEN7LGMCTEz";
                 var payload = new Dictionary<string, string>
                 {
                     { "value1", topic },
