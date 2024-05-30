@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Image Gallery</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let image of images" class="image-item">
+    <img [src]="image.Url" [alt]="image.FileName" style="max-width: 100%; height: auto;">
+    <div>{{ formatTimestamp(image.FileName) }}</div>
+    <ion-button (click)="handleDelete(image.FileName)">Delete</ion-button>
+  </div>
+</ion-content>

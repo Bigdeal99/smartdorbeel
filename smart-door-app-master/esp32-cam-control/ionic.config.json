@@ -1,0 +1,7 @@
+{
+  "name": "esp32-cam-control",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

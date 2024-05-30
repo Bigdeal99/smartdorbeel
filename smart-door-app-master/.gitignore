@@ -1,0 +1,78 @@
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# IDE - JetBrains Rider
+.idea/
+*.sln.iml
+
+# Rider Database Tool configuration
+.idea/dataSources/
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+.idea/sqlDataSources.xml
+.idea/datasource*
+
+# Build Folders (you can add more specific build folders like bin/Debug or obj/Release)
+**/bin/
+**/obj/
+
+# NuGet Packages
+*.nupkg
+# The packages folder can be ignored if you're using PackageReference
+**/[Pp]ackages/
+# Uncomment if you store your NuGet packages in a folder inside the project
+#!packages/
+
+# MSTest test Results
+**/[Tt]est[Rr]esult*/
+**/[Bb]uild[Ll]og.*
+
+# NUNIT
+**/*.VisualState.xml
+TestResult.xml
+
+# Build Results of an MSBuild Project
+**/[Dd]ebugPS/
+**/[Rr]eleasePS/
+**/x64/
+**/[Bb]uild/
+**/[Bb]in/
+**/[Oo]bj/
+**/[Ll]ogs/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# ASP.NET Scaffolding
+**/ScaffoldingReadMe.txt
+
+# Entity Framework
+**/Migrations/
+**/*.jfm
+**/*.jtp
+
+# Others
+**/ClientApp/node_modules/
+**/*.pfx
+**/*.user
+*.dotCover
+
+# Visual Studio Code
+.vscode/
+
+# Rider specific files
+.idea/
+.idea/*.iml
+.idea/modules.xml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dataSources/
+.idea/dataSources.local.xml
+.idea/dataSources.xml
+.idea/sqlDataSources.xml
+.idea/datasource*

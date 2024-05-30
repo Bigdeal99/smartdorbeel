@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Camera Control</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button expand="full" (click)="handleCommand('start')">Start Stream</ion-button>
+  <ion-button expand="full" (click)="handleCommand('stop')">Stop Stream</ion-button>
+  <ion-button expand="full" (click)="handleCommand('capture')">Capture Image</ion-button>
+  <video #videoElement controls></video>
+</ion-content>
