@@ -22,7 +22,7 @@ public class BlobStorageService
         var containerClient = _blobServiceClient.GetBlobContainerClient("iot-10sec-video");
         var images = new List<ImageData>();
         var sasToken =
-            @"sp=racwdli&st=2024-05-28T22:00:00Z&se=2024-05-30T22:00:00Z&sv=2022-11-02&sr=c&sig=0pdQqtN8IHamgFC7CnPvt3vBGV4JyL1vfyRCxt2PDNc%3D";
+            @"sp=racwdli&st=2024-05-31T22:29:05Z&se=2024-07-06T06:29:05Z&sv=2022-11-02&sr=c&sig=y1coXPiJxbwFwE0H9c8ydn0kd715N%2BKE1n1q6H%2BuuwY%3D";
 
         await foreach (var blobItem in containerClient.GetBlobsAsync())
         {
