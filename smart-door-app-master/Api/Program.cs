@@ -21,8 +21,6 @@ builder.Services.AddSingleton<ConnectionManager>();
 builder.Services.AddSingleton<BellService>();
 builder.Services.AddSingleton<MQTTUtility>();
 builder.Services.AddSingleton<BellRepository>();
-builder.Services.AddSingleton<BaseEventHandler<ClientWantsToSignInWithNameDto>, ClientWantsToSignInWithName>();
-builder.Services.AddSingleton<BaseEventHandler<ClientWantsToSeeStreamDto>, ClientWantsToSeeStream>();
 
 
 builder.Services.AddNpgsqlDataSource(Utilities.ProperlyFormattedConnectionString, 

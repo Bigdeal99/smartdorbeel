@@ -36,3 +36,8 @@ public class ClientWantsToDeleteSingleLogDto : BaseDto
 {
     public string FileName { get; set; }
 }
+
+public class ClientWantsToSearchForImagesDto : BaseDto
+{
+    public string DateTime { get; set; }
+}

@@ -5,6 +5,11 @@
 </ion-header>
 
 <ion-content>
+  <ion-item>
+    <ion-label>Date and Time</ion-label>
+    <ion-datetime display-format="YYYY-MM-DDTHH:mm:ss" picker-format="YYYY-MM-DD HH:mm" [(ngModel)]="searchDateTime"></ion-datetime>
+  </ion-item>
+  <ion-button (click)="handleSearch()">Search</ion-button>
   <div *ngFor="let image of images" class="image-item">
     <img [src]="image.Url" [alt]="image.FileName" style="max-width: 100%; height: auto;">
     <div>{{ formatTimestamp(image.FileName) }}</div>

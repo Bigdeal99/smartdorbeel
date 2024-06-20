@@ -9,6 +9,7 @@ import { BellLog } from "../../interfaces/bell-log";
 })
 export class ImageGalleryComponent implements OnInit {
   images: BellLog[] = [];
+  searchDateTime: string = '';
 
   constructor(private websocketService: WebSocketService) { }
 
@@ -33,6 +34,24 @@ export class ImageGalleryComponent implements OnInit {
   handleDelete(fileName: string): void {
     console.log(`Delete image: ${fileName}`);
     this.websocketService.send('ClientWantsToDeleteSingleLog', { FileName: fileName });
+  }
+
+  handleSearch(): void {
+    if (this.searchDateTime) {
+      const formattedDate = this.formatDate(this.searchDateTime);
+      console.log(`Searching for images on: ${formattedDate}`); // Log the formatted date
+      this.websocketService.send('ClientWantsToSearchForImages', { DateTime: formattedDate });
+    }
+  }
+
+  formatDate(dateTime: string): string {
+    const date = new Date(dateTime);
+    const year = date.getFullYear().toString();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    const formattedDate = `${year}${month}${day}`;
+    console.log(`Formatted Date: ${formattedDate}`); // Log the formatted Date
+    return formattedDate;
   }
 
   formatTimestamp(fileName: string): string {
